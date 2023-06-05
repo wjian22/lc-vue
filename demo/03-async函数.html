@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+	 
+	function fn(){	
+		// 其实它没有返回得到undefined， 有返回值，只是默认返回的 只是它的值是 undefined
+		
+		// 可以设置返回值
+		return 'abc';
+	};
+	console.log(fn()); //undefined abc
+	
+	// 改造成 async
+	async function foo(){
+		console.log('函数运行了');
+		//如果在async 函数内 设置返回值
+		return 'xyz';
+	};
+	// async 函数默认返回一个 promise实例！！！如果有返回值，不再是普通的返回值，而是把这个值包装成了一个promise实例对象
+	
+	foo().then(res => {
+		console.log(res);
+	})
+	
+</script>

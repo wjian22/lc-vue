@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+	
+	//await async wait
+	//要点一: await关键只能在async函数体内使用
+	//要点二: await后面只能等待的是一个成功的promise实例的结果数据
+	
+	async function fn(){
+		
+		console.log('aaa');
+		
+		//await 拿到的是一个成功的 结果 如果等待的是一个有异步程序的结果？
+		// await 帮我们.then了，还等待了
+		let res = await new Promise((resolve, reject) => {
+			
+			setTimeout(() => {
+				// reject('失败的数据');
+				resolve('成功的数据');
+			}, 3000);
+			
+		});
+		// 同步  后面的同步程序 真的是 等了上面的异步程序 
+		console.log('bbb');
+		console.log(res);
+		
+	};
+	
+	fn(); //返回值为一个undefined的promise 实例
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
