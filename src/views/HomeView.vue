@@ -40,7 +40,7 @@
 		async created(){
 			
 			this.hello();
-			console.log(this.wjLib);
+			// console.log(this.wjLib);
 			//this.getCatData();
 			// 异步变同步
 			// let res = await this.wjAPI.getCatGoodsBannerData('/api_goods', {page:1, pagesize : 4});

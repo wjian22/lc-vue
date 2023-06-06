@@ -2,17 +2,9 @@
 	<div class="home-index">
 		
 		<!-- 轮播图 -->
-		<div class="banner">
-			<ul class="banner-list">
-				<li v-for="item in bannerList" :key="item.goods_id">
-					<router-link :to="{path : '/home/product', query : {goodsId : item.goods_id}}">
-						<img :src="item.goods_thumb">
-					</router-link>
-					<!-- <a href=""><img :src="item.goods_thumb"></a> -->
-				</li>
-			</ul>	
-		</div>
-		
+		<!-- 调用轮播组件 -->
+		<wj-swipe :autoplay="2000" :banner-list="bannerList" :speed="300" :width="1000" :image-width-height="{width:1000, height : 475}"></wj-swipe>
+
 		<!-- 人气良品 -->
 		<div class="hot">
 			<h1 class="hot-title">人气良品</h1>
@@ -37,7 +29,7 @@
 
 <script>
 	
-	// import wjAPI from '../../api'
+	// import WjSwipe from '../../components/banner/WjSwipe.vue'
 	
 	export default {
 		data(){
@@ -51,13 +43,17 @@
 			}
 		},
 		
+		// components : {
+		// 	WjSwipe
+		// },
+		
 		async created(){
 			
 			this.hotList = await this.wjAPI.getCatGoodsBannerData('/api_goods',{pagesize : 3, page : 1});
 			
 			this.bannerList = await this.wjAPI.getCatGoodsBannerData('/api_banner',{bannerId : 1});
 
-			
+			console.log(this.bannerList)
 			
 		},
 		
@@ -88,19 +84,6 @@
 </script>
 
 <style scoped>
-	/* 轮播 */
-	.banner{
-		width:1000px;
-		height: 475px;
-		margin: 0px auto;
-		position: relative;
-	}
-	.banner-list li{
-		position: absolute;
-		left: 0px;
-		top: 0px;
-	}
-	
 	/* 热闹商品 */
 	.hot{
 		width:1000px;

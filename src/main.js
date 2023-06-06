@@ -31,9 +31,14 @@ let hello = function(){
 }
 app.config.globalProperties.hello = hello
 
-import {wjAjax, wjLib} from './lib/wj2302.js'
-app.config.globalProperties.wjAjax = wjAjax
-app.config.globalProperties.wjLib = wjLib
+// import {wjAjax, wjLib} from './lib/wj2302.js'
+// app.config.globalProperties.wjAjax = wjAjax
+// app.config.globalProperties.wjLib = wjLib
+
+//引入自己封装的组件，然后注册成全局组件
+import WjSwipe from './components/banner/WjSwipe.vue'
+// console.log(WjSwipe);
+app.component(WjSwipe.name, WjSwipe)
 
 // app.use(VueAxios, Axios)
 app.use(router)

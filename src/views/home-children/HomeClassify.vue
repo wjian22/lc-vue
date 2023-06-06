@@ -3,33 +3,50 @@
 	<div class="hot">
 		<h1 class="hot-title">分类良品</h1>
 		<ul class="hot-list">
-			<li>
-				<img src="../../assets/img/283895.jpg" alt="">
-				<p>商品名称</p>
-				<p>价格</p>
-				<p>描述</p>
-				<p>点赞</p>
-				<p>品牌</p>
+			<li @click="toProduct(item.goods_id)" v-for="item in goodsList" :key="item.goods_id">
+				<img :src="item.goods_thumb" alt="">
+				<p>{{item.goods_name}}</p>
+				<p>{{item.price}}</p>
+				<p>{{item.goods_desc}}</p>
+				<p>{{item.goods_star}}</p>
+				<p>{{item.goods_brand}}</p>
 			</li>
-		</ul>		
+		</ul>
+		
 		<!-- 分页器 -->
-		<div class="pagination"></div>		
+		<div class="pagination">
+			
+		</div>
 	</div>
 </template>
 
 <script>
 	export default {
-		
-		created(){
-			// 获取当前分类数据
-			this.nowCatId = this.$route.catId;
-		},
-		
 		data(){
 			return {
-				nowCatId : 0
+				goodsList : [],
+				pagesize : 3,
+				nowPage : 1
+			}
+		},
+		
+		async created(){
+			this.goodsList = await this.wjAPI.getCatGoodsBannerData('/api_goods', {
+				catId : this.$route.query.catId,
+				pagesize : this.pagesize,
+				page : this.nowPage
+			});
+			 
+			 console.log(this.goodsList);
+		},
+		
+		methods : {
+			toProduct(id){
+				this.$router.push({path : '/home/product', query : {goodsId : id}})
 			}
 		}
+		
+		
 
 	}
 </script>
